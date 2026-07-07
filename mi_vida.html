@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Mi vida</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  min-height:100vh;
+  overflow:hidden;
+  font-family: Georgia, "Times New Roman", serif;
+  background:linear-gradient(to bottom,#b66d66,#f7b174,#ffe6c2);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.card{
+  width:94%;
+  max-width:1180px;
+  height:650px;
+  border-radius:35px;
+  overflow:hidden;
+  position:relative;
+  background:
+    radial-gradient(circle at 86% 75%, #fff7a8 0 4%, transparent 10%),
+    linear-gradient(to bottom,#f8b0a0 0%,#ffd39b 55%,#5b6d2e 100%);
+  box-shadow:0 25px 60px rgba(0,0,0,.35);
+  border:1px solid rgba(255,255,255,.7);
+}
+
+.text{
+  position:absolute;
+  left:70px;
+  top:95px;
+  width:390px;
+  color:#4a1717;
+  z-index:40;
+}
+
+.text h1{
+  font-size:36px;
+  line-height:1.05;
+  margin-bottom:22px;
+}
+
+.decor{
+  text-align:center;
+  font-size:28px;
+  color:#d94865;
+  margin-bottom:28px;
+}
+
+.text p{
+  font-size:24px;
+  line-height:1.35;
+}
+
+.text b{
+  color:#a51e34;
+}
+
+.counter{
+  position:absolute;
+  left:55px;
+  bottom:55px;
+  width:430px;
+  padding:22px 25px;
+  background:rgba(255,240,232,.86);
+  backdrop-filter:blur(8px);
+  border-radius:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,.16);
+  color:#5a1616;
+  z-index:45;
+  text-align:center;
+}
+
+.counter-title{
+  font-size:20px;
+  margin-bottom:15px;
+}
+
+.time-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+}
+
+.num{
+  font-size:35px;
+  font-weight:bold;
+}
+
+.label{
+  font-size:12px;
+}
+
+.date{
+  margin-top:15px;
+  font-size:15px;
+}
+
+.grass{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  height:130px;
+  background:linear-gradient(to top,#263915,#637735,transparent);
+  z-index:5;
+}
+
+.tree{
+  position:absolute;
+  right:-20px;
+  bottom:35px;
+  width:720px;
+  height:600px;
+  z-index:15;
+}
+
+.trunk{
+  position:absolute;
+  bottom:0;
+  left:370px;
+  width:115px;
+  height:350px;
+  background:
+    linear-gradient(90deg,#1f0d06,#5b2a14 35%,#8a4a25 55%,#2b1208);
+  border-radius:58% 45% 14% 14%;
+  box-shadow:
+    inset 18px 0 25px rgba(255,255,255,.08),
+    inset -22px 0 35px rgba(0,0,0,.45),
+    8px 0 20px rgba(0,0,0,.2);
+  z-index:12;
+}
+
+.trunk::before{
+  content:"";
+  position:absolute;
+  left:48px;
+  top:30px;
+  width:13px;
+  height:290px;
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+}
+
+.branch{
+  position:absolute;
+  background:linear-gradient(90deg,#1f0d06,#5b2a14,#2b1208);
+  height:25px;
+  border-radius:50px;
+  transform-origin:left center;
+  z-index:11;
+}
+
+.b1{width:260px;left:420px;bottom:330px;transform:rotate(-35deg);}
+.b2{width:250px;left:410px;bottom:395px;transform:rotate(-15deg);}
+.b3{width:210px;left:395px;bottom:455px;transform:rotate(-55deg);}
+.b4{width:245px;left:260px;bottom:335px;transform:rotate(205deg);}
+.b5{width:220px;left:275px;bottom:410px;transform:rotate(190deg);}
+.b6{width:180px;left:315px;bottom:465px;transform:rotate(230deg);}
+
+.crown{
+  position:absolute;
+  width:700px;
+  height:390px;
+  left:0;
+  top:0;
+  animation:sway 5s ease-in-out infinite;
+  z-index:20;
+}
+
+.blossom{
+  position:absolute;
+  border-radius:50%;
+  background:
+    radial-gradient(circle at 45% 45%, #ffd6dd 0 8%, transparent 25%),
+    radial-gradient(circle at 65% 30%, #ff9aaa 0 10%, transparent 24%),
+    radial-gradient(circle at 50% 50%, #d94a68 0 35%, #9e243e 72%, #641827 100%);
+  box-shadow:
+    inset -18px -22px 35px rgba(65,0,15,.25),
+    inset 18px 18px 30px rgba(255,255,255,.16),
+    0 12px 30px rgba(0,0,0,.18);
+}
+
+.l1{width:260px;height:200px;left:80px;top:110px;}
+.l2{width:320px;height:235px;left:210px;top:45px;}
+.l3{width:280px;height:215px;left:400px;top:120px;}
+.l4{width:270px;height:205px;left:190px;top:190px;}
+.l5{width:220px;height:170px;left:40px;top:45px;}
+.l6{width:220px;height:170px;left:465px;top:45px;}
+
+@keyframes sway{
+  0%,100%{transform:rotate(0deg);}
+  50%{transform:rotate(1.4deg);}
+}
+
+.swing{
+  position:absolute;
+  right:260px;
+  bottom:135px;
+  width:90px;
+  height:190px;
+  z-index:35;
+}
+
+.rope{
+  position:absolute;
+  top:0;
+  width:2px;
+  height:160px;
+  background:#3b1d0f;
+}
+
+.r1{left:15px;}
+.r2{right:15px;}
+
+.seat{
+  position:absolute;
+  bottom:20px;
+  width:90px;
+  height:10px;
+  background:#3b1d0f;
+  border-radius:6px;
+}
+
+.flower{
+  position:absolute;
+  width:14px;
+  height:14px;
+  z-index:30;
+}
+
+.flower::before,
+.flower::after{
+  content:"";
+  position:absolute;
+  width:14px;
+  height:14px;
+  background:#ff7890;
+  border-radius:50% 50% 0 50%;
+  transform:rotate(45deg);
+}
+
+.flower::after{
+  background:#ffd1dc;
+  transform:rotate(-45deg);
+}
+
+.petal{
+  position:absolute;
+  width:14px;
+  height:20px;
+  background:#e63960;
+  border-radius:80% 0 80% 0;
+  animation:fall linear forwards;
+  z-index:50;
+}
+
+@keyframes fall{
+  0%{
+    transform:translate(0,0) rotate(0deg);
+    opacity:1;
+  }
+  50%{
+    transform:translate(var(--wind),260px) rotate(220deg);
+  }
+  100%{
+    transform:translate(calc(var(--wind)*1.8),700px) rotate(520deg);
+    opacity:0;
+  }
+}
+
+.light{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:#fff6a5;
+  border-radius:50%;
+  box-shadow:0 0 13px #fff6a5;
+  animation:blink 2s infinite alternate;
+  z-index:55;
+}
+
+@keyframes blink{
+  from{opacity:.3;}
+  to{opacity:1;}
+}
+
+@media(max-width:850px){
+  .card{
+    height:95vh;
+  }
+
+  .text{
+    left:28px;
+    top:45px;
+    width:85%;
+  }
+
+  .text h1{
+    font-size:27px;
+  }
+
+  .text p{
+    font-size:18px;
+  }
+
+  .tree{
+    transform:scale(.68);
+    right:-230px;
+    bottom:40px;
+  }
+
+  .counter{
+    width:86%;
+    left:7%;
+    bottom:32px;
+  }
+
+  .num{
+    font-size:27px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+
+  <div class="grass"></div>
+
+  <div class="text">
+    <h1>Para el amor de mi vida "V Y":</h1>
+    <div class="decor">❤</div>
+
+    <p>
+      Te amo con todo mi corazon y eso nunca nunca cambiara. Eres lo mejor que ha 
+      llegado a mi vida y agrazeco al universo por haberte puesto en mi camino.
+    </p>
+  </div>
+
+  <div class="tree">
+    <div class="branch b1"></div>
+    <div class="branch b2"></div>
+    <div class="branch b3"></div>
+    <div class="branch b4"></div>
+    <div class="branch b5"></div>
+    <div class="branch b6"></div>
+
+    <div class="trunk"></div>
+
+    <div class="crown">
+      <div class="blossom l1"></div>
+      <div class="blossom l2"></div>
+      <div class="blossom l3"></div>
+      <div class="blossom l4"></div>
+      <div class="blossom l5"></div>
+      <div class="blossom l6"></div>
+    </div>
+  </div>
+
+  <div class="swing">
+    <div class="rope r1"></div>
+    <div class="rope r2"></div>
+    <div class="seat"></div>
+  </div>
+
+  <div class="counter">
+    <div class="counter-title">Mi amor por ti comenzó hace...</div>
+
+    <div class="time-grid">
+      <div><div class="num" id="days">0</div><div class="label">DÍAS</div></div>
+      <div><div class="num" id="hours">0</div><div class="label">HORAS</div></div>
+      <div><div class="num" id="minutes">0</div><div class="label">MINUTOS</div></div>
+      <div><div class="num" id="seconds">0</div><div class="label">SEGUNDOS</div></div>
+    </div>
+
+    <div class="date">Desde el 7 de septiembre de 2021</div>
+  </div>
+
+</div>
+
+<script>
+const card = document.getElementById("card");
+const startDate = new Date("2021-09-07T00:00:00");
+
+function updateCounter(){
+  const now = new Date();
+  let diff = Math.floor((now - startDate) / 1000);
+
+  const days = Math.floor(diff / 86400);
+  diff %= 86400;
+
+  const hours = Math.floor(diff / 3600);
+  diff %= 3600;
+
+  const minutes = Math.floor(diff / 60);
+  const seconds = diff % 60;
+
+  document.getElementById("days").textContent = days;
+  document.getElementById("hours").textContent = hours;
+  document.getElementById("minutes").textContent = minutes;
+  document.getElementById("seconds").textContent = seconds;
+}
+
+setInterval(updateCounter,1000);
+updateCounter();
+
+function createPetal(){
+  const petal = document.createElement("div");
+  petal.className = "petal";
+
+  const colors = ["#ff4d6d","#ff758f","#e63960","#c9184a","#ffb3c1"];
+  petal.style.background = colors[Math.floor(Math.random()*colors.length)];
+
+  petal.style.left = Math.random()*520 + 540 + "px";
+  petal.style.top = Math.random()*230 + 50 + "px";
+
+  const size = Math.random()*10 + 10;
+  petal.style.width = size + "px";
+  petal.style.height = size*1.5 + "px";
+
+  petal.style.setProperty("--wind", Math.random()*180 - 90 + "px");
+  petal.style.animationDuration = Math.random()*4 + 5 + "s";
+
+  card.appendChild(petal);
+
+  setTimeout(()=>petal.remove(),9000);
+}
+
+function createFlowers(){
+  for(let i=0;i<140;i++){
+    const f = document.createElement("div");
+    f.className = "flower";
+    f.style.left = Math.random()*620 + 450 + "px";
+    f.style.top = Math.random()*300 + 55 + "px";
+    f.style.transform = `scale(${Math.random()*0.75+0.4}) rotate(${Math.random()*360}deg)`;
+    card.appendChild(f);
+  }
+}
+
+function createLights(){
+  for(let i=0;i<40;i++){
+    const l = document.createElement("div");
+    l.className = "light";
+    l.style.left = Math.random()*570 + 500 + "px";
+    l.style.top = Math.random()*300 + 70 + "px";
+    l.style.animationDelay = Math.random()*2 + "s";
+    card.appendChild(l);
+  }
+}
+
+createFlowers();
+createLights();
+setInterval(createPetal,130);
+</script>
+
+</body>
+</html>
